@@ -1,0 +1,69 @@
+2 - Orientação a Objetos. No cenário da biblioteca existem varias entidades que as tratamos como objetos, tendo cada uma a sua propriedade e comportamento distinto. A interação entre esses objetos se torna mais facilitada através de métodos e mensagens o que facilita a implementação de funcionalidades. O reuso também se torna mais fácil devido aos conceitos de herança e polimorfismo. Quanto a questão de evolução do sistema o código seja facilmente modificado, estendido e mantido sem grandes dificuldades. Embora o sistema de Orientação a objetos possa ser custoso devido a manipulação de objetos, a facilidade de modelagem e da manutenção do código compensam a preocupação com eficiência.
+
+3 - 
+Classes: 
+Livro, Autor, Usuário, Empréstimo.
+
+Propriedades: 
+Livro:
+Título - String
+Gênero - String
+Autor - Classe Autor, uma vez que um autor pode ter vários livros
+Autor:
+Nome - String
+Nacionalidade - String
+Obras Publicadas - Lista de Livros, referencia a uma lista de objetos da classe livros ja que um autor pode ter vários livros
+Usuário:
+Nome - String
+Idade - Int
+Histórico de Empréstimos - Lista de Empréstimos, O usuário pode ter feito vários empréstimos, então essa será uma lista de objetos da classe Empréstimo.
+Empréstimo:
+Data de Retirada - Date
+Data de Devolução - Date
+Livro - Livro, A classe Empréstimo tem uma referência à classe Livro, indicando qual livro foi retirado.
+Usuário - Usuário, A classe Empréstimo tem uma referência à classe Usuário, indicando qual usuário fez o empréstimo.
+
+Relacionamentos:
+Livro ↔ Autor: Relacionamento de muitos para 1
+Autor ↔ Livro: Relacionamento de 1 para muitos
+Usuário ↔ Empréstimo: Relacionamento de 1 para muitos
+Empréstimo ↔ Livro: Relacionamento de 1 para 1
+
+4 - 
+Métodos a serem adicionados
+
+Livro
+verificarDisponibilidade()
+
+Autor
+adicionarObra(Livro livro)
+
+Usuário
+consultarHistoricoEmpréstimos()
+verificarElegibilidade(Livro livro)
+adicionarEmpréstimo(Empréstimo emprestimo)
+atualizarHistoricoDevolucao(Empréstimo emprestimo)
+
+Empréstimo
+registrarEmpréstimo(Livro livro, Usuario usuario)
+registrarDevolucao()
+
+Biblioteca (nova classe)
+verificarUsuarioElegivel(Usuario usuario, Livro livro)
+cadastrarLivro(Livro livro)
+cadastrarAutor(Autor autor)
+cadastrarUsuario(Usuario usuario)
+
+Fluxo de Interação:
+Empréstimo:
+O Biblioteca.verificarUsuarioElegivel(Usuario, Livro) é chamado para verificar se o usuário está apto a pegar o livro.
+Se o usuário for apto, o Empréstimo.registrarEmpréstimo(Livro, Usuario) é chamado para registrar o empréstimo, e o Usuario.adicionarEmpréstimo(Empréstimo) é chamado para adicionar esse empréstimo ao histórico do usuário.
+
+Devolução:
+O Empréstimo.registrarDevolucao() é chamado para registrar a devolução do livro.
+O Usuario.atualizarHistoricoDevolucao(Empréstimo) é chamado para atualizar o histórico de empréstimos do usuário.
+
+Cadastros:
+O Biblioteca.cadastrarLivro(Livro) é chamado para cadastrar um novo livro.
+O Biblioteca.cadastrarAutor(Autor) é chamado para cadastrar um novo autor.
+O Biblioteca.cadastrarUsuario(Usuario) é chamado para cadastrar um novo usuário.
