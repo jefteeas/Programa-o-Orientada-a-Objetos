@@ -1,0 +1,80 @@
+1 - Vou reaproveitar a PublicavelInterface que ja tem o metodo publicar().
+
+public interface PublicavelInterface{
+	void publicar();}
+
+2 - Criar as Classes Concretas de Estratégia
+
+Publicação de Livros:
+
+public class EstrategiaPublicacaoLivro implements PublicavelInterface {
+    @Override
+    public void publicar() {
+        System.out.println("Publicando o livro...");
+    }
+}
+
+Publicação de Artigos:
+
+public class EstrategiaPublicacaoArtigo implements PublicavelInterface {
+    @Override
+    public void publicar() {
+        System.out.println("Publicando o artigo...");
+    }
+}
+
+3 - Modificar UsuarioDecorator / Autor
+
+public class Autor extends Usuario {
+    private PublicavelInterface estrategiaPublicacao; 
+
+    public Autor(String nome, int idade) {
+        super(nome, idade);
+    }
+
+    // Método para definir a estratégia de publicação
+    public void setEstrategiaPublicacao(PublicavelInterface estrategia) {
+        this.estrategiaPublicacao = estrategia;
+    }
+
+    // Método para executar a publicação de acordo com a estratégia
+    public void publicar() {
+        if (estrategiaPublicacao != null) {
+            estrategiaPublicacao.publicar();
+        } else {
+            System.out.println("Nenhuma estratégia de publicação definida.");
+        }
+    }
+}
+
+4 - Classe de teste
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class UsuarioTest {
+    @Test
+    public void testPublicarLivroComEstratégiaLivro() {
+        Autor autor = new Autor("Jessica Felix", 35);
+        PublicavelInterface estrategiaLivro = new EstrategiaPublicacaoLivro();
+        autor.setEstrategiaPublicacao(estrategiaLivro);
+
+        autor.publicar(); 
+    }
+
+    @Test
+    public void testPublicarArtigoComEstratégiaArtigo() {
+        Autor autor = new Autor("Lucas Rafael", 28);
+        PublicavelInterface estrategiaArtigo = new EstrategiaPublicacaoArtigo();
+        autor.setEstrategiaPublicacao(estrategiaArtigo);
+
+        autor.publicar();  
+    }
+
+    @Test
+    public void testSemEstratégiaDePublicacao() {
+        Autor autor = new Autor("Maria Silva", 30);
+
+        autor.publicar();  
+    }
+}

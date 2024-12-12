@@ -1,0 +1,24 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class ArtigoTest {
+    @Test
+    public void testCriacaoArtigo() {
+        Autor autor = new Autor("Alan Turing", 41, false);
+        Artigo artigo = new Artigo("Entendendo Compiladores", autor, "tecnologia", true);
+
+        assertEquals("Entendendo Compiladores", artigo.getTitulo());
+        assertEquals(autor, artigo.getAutor());
+        assertEquals("tecnologia", artigo.getGenero());
+        assertTrue(artigo.isPublicado());
+    }
+
+    @Test
+    public void testAlterarTituloArtigo() {
+        Autor autor = new Autor("Alan Turing", 41, false);
+        Artigo artigo = new Artigo("Entendendo Compiladores", autor, "tecnologia", true);
+
+        artigo.setTitulo("Novo Título");
+        assertEquals("Novo Título", artigo.getTitulo());
+    }
+}

@@ -1,0 +1,29 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Autor extends Pessoa {
+    private List<Livro> obrasPublicadas;
+    private boolean isUsuario; // Indica se o autor também é um usuário
+
+    public Autor(String nome, int idade, boolean isUsuario) {
+        super(nome, idade);
+        this.obrasPublicadas = new ArrayList<>();
+        this.isUsuario = isUsuario;
+    }
+
+    public boolean isUsuario() {
+        return isUsuario;
+    }
+
+    public void setUsuario(boolean isUsuario) {
+        this.isUsuario = isUsuario;
+    }
+
+    public void adicionarObra(Livro livro) {
+        obrasPublicadas.add(livro);
+    }
+
+    public List<Livro> getObrasPublicadas() {
+        return obrasPublicadas;
+    }
+}
